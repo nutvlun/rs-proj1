@@ -3,9 +3,21 @@
 #[macro_use] extern crate rocket;
 
 
-#[get("/hello")]
-fn world() -> &'static str {
-    "Hello, world!"
+
+fn mul2(num: &u8)->u8 {
+    return num*2;
+}
+
+#[get("/hello/<name>/<age>/<cool>")]
+fn world(name : String, age: u8, cool: bool) -> String  {
+   
+    if cool {
+       let num = mul2(&age);
+       format!("You're a cool {} year old, {}!", num, name)
+
+    } else {
+        format!("{}, we need to talk about your coolness.", name)
+    }
 }
 #[get("/test")]
 fn test() -> &'static str {
